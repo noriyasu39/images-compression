@@ -9,7 +9,7 @@ const changed = require("gulp-changed");
 // srcImgフォルダのjpg,png画像を圧縮して、distImgフォルダに保存する
 gulp.task("default", function () {
   return gulp
-    .src("./src/srcImg/*.{png,jpg,svg}") // srcImgフォルダ以下のpng,jpg,svg画像を取得する
+    .src("./src/srcImg/**/*.{png,jpg}") // srcImgフォルダ以下のpng,jpg画像を取得する
     .pipe(changed("distImg")) // srcImg と distImg を比較して異なるものだけ圧縮する
     .pipe(
       imagemin([
