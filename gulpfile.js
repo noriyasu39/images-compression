@@ -6,13 +6,21 @@ const mozjpeg = require("imagemin-mozjpeg");
 const pngquant = require("imagemin-pngquant");
 const changed = require("gulp-changed");
 
+// 画像のディレクトリを定義 (相対パス)
+const paths = {
+  // 圧縮前のパス
+  images: "src/images/",
+  // 圧縮後のパス
+  dist: "src/dist/images/"
+}
+
 /**
  * 画像圧縮のタスク
  */
 const imagCompression = () => {
   return gulp
-    .src("src/images/**/*.{jpg,jpeg,png,gif,svg}")
-    .pipe(changed(dist)) // images と dist を比較して、差分だけを圧縮する
+    .src(`${paths.images}**/*.{jpg,jpeg,png,gif,svg}`)
+    .pipe(changed(paths.dist)) // images と dist を比較して、差分だけを圧縮する
     .pipe(
       imagemin([
         pngquant({
@@ -34,7 +42,7 @@ const imagCompression = () => {
         }),
       ]),
     )
-    .pipe(gulp.dest("./src/dist/")); //保存
+    .pipe(gulp.dest(paths.dist)); //保存
 };
 
 exports.default = imagCompression;
