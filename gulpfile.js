@@ -42,6 +42,7 @@ const imagCompression = () => {
         }),
       ]),
     )
+    .pipe(imagemin()) // ガンマ情報を除去
     .pipe(gulp.dest(paths.dist)); //保存
 };
 
